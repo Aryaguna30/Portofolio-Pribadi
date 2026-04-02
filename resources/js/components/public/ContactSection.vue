@@ -138,6 +138,16 @@
               aria-hidden="true"
             />
 
+            <!-- Cloudflare Turnstile widget (rendered only when site key is configured) -->
+            <div
+              v-if="turnstileSiteKey"
+              ref="turnstileRef"
+              class="cf-turnstile"
+              :data-sitekey="turnstileSiteKey"
+              data-theme="dark"
+              data-size="flexible"
+            ></div>
+
             <!-- Row: Name + Email -->
             <div class="form-row">
               <!-- Name -->
@@ -311,6 +321,10 @@ const props = defineProps({
 const { t } = useI18n();
 const page = usePage();
 
+// Turnstile site key from Inertia shared props or meta
+const turnstileSiteKey = computed(() => page.props.turnstileSiteKey ?? null);
+const turnstileRef = ref(null);
+
 // ── State ──────────────────────────────────────────────────────────────────
 const honeypot   = ref('');
 const submitting = ref(false);
@@ -321,11 +335,12 @@ const clientErrors = ref({ name: '', email: '', subject: '', body: '' });
 
 // Inertia useForm for submission
 const form = useForm({
-  name:    '',
-  email:   '',
-  subject: '',
-  body:    '',
-  _hp:     '',
+  name:               '',
+  email:              '',
+  subject:            '',
+  body:               '',
+  _hp:                '',
+  cf_turnstile_token: '',
 });
 
 // ── Scroll Reveal ──────────────────────────────────────────────────────────
@@ -375,6 +390,12 @@ function submit() {
 
   // Sync honeypot value into form data
   form._hp = honeypot.value;
+
+  // Collect Turnstile token if widget is present
+  if (turnstileRef.value) {
+    const tokenInput = turnstileRef.value.querySelector('[name="cf-turnstile-response"]');
+    form.cf_turnstile_token = tokenInput?.value ?? '';
+  }
 
   submitting.value = true;
 

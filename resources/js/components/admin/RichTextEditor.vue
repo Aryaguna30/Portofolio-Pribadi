@@ -25,37 +25,40 @@ let quill = null;
 let ignoreNextChange = false;
 
 onMounted(async () => {
-  // Dynamically import Quill to avoid SSR issues
-  const { default: Quill } = await import('quill');
+  try {
+    const { default: Quill } = await import('quill');
 
-  quill = new Quill(editorRef.value, {
-    theme: 'snow',
-    placeholder: props.placeholder,
-    modules: {
-      toolbar: [
-        [{ header: [2, 3, false] }],
-        ['bold', 'italic', 'underline'],
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        ['link'],
-        ['clean'],
-      ],
-    },
-  });
+    quill = new Quill(editorRef.value, {
+      theme: 'snow',
+      placeholder: props.placeholder,
+      modules: {
+        toolbar: [
+          [{ header: [2, 3, false] }],
+          ['bold', 'italic', 'underline'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          ['link'],
+          ['clean'],
+        ],
+      },
+    });
 
-  // Set initial content
-  if (props.modelValue) {
-    quill.root.innerHTML = props.modelValue;
-  }
-
-  // Emit on change
-  quill.on('text-change', () => {
-    if (ignoreNextChange) {
-      ignoreNextChange = false;
-      return;
+    // Set initial content safely via innerHTML (only on mount, not reactive)
+    if (props.modelValue) {
+      quill.root.innerHTML = props.modelValue;
     }
-    const html = quill.root.innerHTML === '<p><br></p>' ? '' : quill.root.innerHTML;
-    emit('update:modelValue', html);
-  });
+
+    // Emit on change
+    quill.on('text-change', () => {
+      if (ignoreNextChange) {
+        ignoreNextChange = false;
+        return;
+      }
+      const html = quill.root.innerHTML === '<p><br></p>' ? '' : quill.root.innerHTML;
+      emit('update:modelValue', html);
+    });
+  } catch (err) {
+    console.error('[RichTextEditor] Failed to initialize Quill:', err);
+  }
 });
 
 // Sync external modelValue changes into Quill without triggering emit loop
@@ -64,8 +67,14 @@ watch(
   (val) => {
     if (!quill) return;
     const current = quill.root.innerHTML === '<p><br></p>' ? '' : quill.root.innerHTML;
-    if (val !== current) {
-      ignoreNextChange = true;
+    if (val === current) return;
+
+    ignoreNextChange = true;
+    try {
+      // Use dangerouslyPasteHTML which is the safe Quill v2 way to set HTML content
+      quill.clipboard.dangerouslyPasteHTML(val ?? '');
+    } catch {
+      // Fallback: direct innerHTML if clipboard API fails
       quill.root.innerHTML = val ?? '';
     }
   },

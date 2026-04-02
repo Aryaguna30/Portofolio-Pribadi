@@ -13,10 +13,10 @@ class DatabaseSeeder extends Seeder
     {
         // Seed admin user (only if no user exists)
         User::firstOrCreate(
-            ['email' => 'admin@example.com'],
+            ['email' => 'Aryasangatgantenganzay@gmail.com'],
             [
                 'name' => 'Admin',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('Abece00'),
             ]
         );
 

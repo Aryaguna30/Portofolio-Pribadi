@@ -25,14 +25,14 @@ class LandingPageController extends Controller
     public function index(): Response
     {
         return Inertia::render('Admin/LandingPage', [
-            'heroSettings' => [
+            'hero' => [
                 'name'        => SiteSetting::get('hero_name', ''),
                 'professions' => SiteSetting::get('hero_professions', []),
                 'description' => SiteSetting::get('hero_description', ''),
             ],
             'timelineEntries' => TimelineEntry::orderBy('sort_order')->get(),
             'skills'          => Skill::orderBy('sort_order')->get(),
-            'cv_file_path'    => SiteSetting::get('cv_file_path', null),
+            'currentCvPath'   => SiteSetting::get('cv_file_path', null),
         ]);
     }
 
@@ -44,17 +44,17 @@ class LandingPageController extends Controller
     public function updateHero(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name'        => ['required', 'string', 'max:255'],
-            'professions' => ['required', 'array'],
+            'name'          => ['required', 'string', 'max:255'],
+            'professions'   => ['required', 'array'],
             'professions.*' => ['string', 'max:255'],
-            'description' => ['required', 'string'],
+            'description'   => ['nullable', 'string'],
         ]);
 
         SiteSetting::set('hero_name', $validated['name']);
         SiteSetting::set('hero_professions', $validated['professions']);
-        SiteSetting::set('hero_description', $validated['description']);
+        SiteSetting::set('hero_description', $validated['description'] ?? '');
 
-        return back()->with('flash', ['success' => 'Hero settings updated.']);
+        return back()->with('success', 'Hero settings updated.');
     }
 
     /**
@@ -82,7 +82,7 @@ class LandingPageController extends Controller
 
         SiteSetting::set('cv_file_path', $newPath);
 
-        return back()->with('flash', ['success' => 'CV uploaded successfully.']);
+        return back()->with('success', 'CV uploaded successfully.');
     }
 
     /**
@@ -99,6 +99,6 @@ class LandingPageController extends Controller
             SiteSetting::set('cv_file_path', null);
         }
 
-        return back()->with('flash', ['success' => 'CV deleted.']);
+        return back()->with('success', 'CV deleted.');
     }
 }

@@ -8,7 +8,7 @@
       <!-- Logo -->
       <div class="login-logo" aria-label="Admin Panel">
         <span class="login-logo__bracket">&lt;</span>
-        <span class="login-logo__text">AF</span>
+        <span class="login-logo__text">NA</span>
         <span class="login-logo__bracket">/&gt;</span>
       </div>
 

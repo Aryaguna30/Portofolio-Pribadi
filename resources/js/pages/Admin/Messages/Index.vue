@@ -39,7 +39,6 @@
                 class="msg-row"
                 :class="{ 'msg-row--unread': !msg.is_read }"
               >
-                <!-- Unread indicator -->
                 <td>
                   <span
                     v-if="!msg.is_read"
@@ -96,6 +95,36 @@
             </tbody>
           </table>
         </div>
+
+        <!-- Pagination -->
+        <div v-if="pagination && pagination.last_page > 1" class="pagination">
+          <Link
+            v-if="pagination.prev_page_url"
+            :href="pagination.prev_page_url"
+            class="page-btn"
+            aria-label="Halaman sebelumnya"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </Link>
+          <span class="page-info">
+            Halaman {{ pagination.current_page }} dari {{ pagination.last_page }}
+            <span class="page-total">({{ pagination.total }} pesan)</span>
+          </span>
+          <Link
+            v-if="pagination.next_page_url"
+            :href="pagination.next_page_url"
+            class="page-btn"
+            aria-label="Halaman berikutnya"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </Link>
+        </div>
       </div>
     </div>
 
@@ -111,16 +140,16 @@
 </template>
 
 <script setup>
-import { computed, reactive } from 'vue';
+import { reactive } from 'vue';
 import { Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import ConfirmDialog from '@/components/admin/ConfirmDialog.vue';
 
 const props = defineProps({
-  messages: { type: Array, default: () => [] },
+  messages:    { type: Array,  default: () => [] },
+  unreadCount: { type: Number, default: 0 },
+  pagination:  { type: Object, default: null },
 });
-
-const unreadCount = computed(() => props.messages.filter((m) => !m.is_read).length);
 
 const dialog = reactive({ open: false, target: null, loading: false });
 
@@ -218,40 +247,32 @@ function executeDelete() {
   padding: 3rem 1rem !important;
 }
 
-/* Unread row */
-.msg-row--unread {
-  background: rgba(124, 58, 237, 0.03);
-}
+.msg-row--unread { background: rgba(124, 58, 237, 0.03); }
 
 .unread-dot {
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: 8px; height: 8px;
   border-radius: 50%;
   background: var(--accent, #7c3aed);
   flex-shrink: 0;
 }
 
-/* Sender */
 .sender-info { display: flex; flex-direction: column; gap: 0.15rem; }
 .sender-name { font-weight: 500; }
 .sender-email { font-size: 0.75rem; color: var(--muted); }
 .font-bold { font-weight: 700; }
 
-/* Subject link */
 .subject-link {
   color: var(--text);
   text-decoration: none;
   transition: color 0.2s;
 }
-
 .subject-link:hover { color: var(--accent); }
 .subject-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
 
 .text-muted { color: var(--muted); }
 .text-sm { font-size: 0.8125rem; }
 
-/* Action buttons */
 .action-btns { display: flex; gap: 0.375rem; }
 
 .btn-icon {
@@ -265,8 +286,37 @@ function executeDelete() {
   transition: all 0.2s;
   text-decoration: none;
 }
-
 .btn-icon:hover { color: var(--text); border-color: rgba(255, 255, 255, 0.15); }
 .btn-icon:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .btn-icon--danger:hover { color: #f87171; border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.08); }
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.page-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.page-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+.page-info {
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.page-total { margin-left: 0.25rem; }
 </style>

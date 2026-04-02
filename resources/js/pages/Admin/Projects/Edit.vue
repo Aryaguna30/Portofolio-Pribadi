@@ -112,7 +112,7 @@
               <h3 class="sidebar-card__title">Thumbnail</h3>
               <ThumbnailUpload
                 v-model="form.thumbnail"
-                :existing-url="project.thumbnail_path ?? null"
+                :existing-url="project.thumbnail_url ?? null"
                 @error="thumbnailError = $event"
               />
               <p v-if="form.errors.thumbnail" class="form-error">{{ form.errors.thumbnail }}</p>

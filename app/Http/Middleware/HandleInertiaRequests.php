@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Message;
 use App\Services\MetaTagService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,8 +38,13 @@ class HandleInertiaRequests extends Middleware
                 'success' => session()->get('success'),
                 'error'   => session()->get('error'),
             ],
-            'locale' => app()->getLocale() ?: 'id',
-            'meta'   => $meta,
+            'locale'           => app()->getLocale() ?: 'id',
+            'meta'             => $meta,
+            'turnstileSiteKey' => config('services.turnstile.site_key') ?: null,
+            // Share unread message count globally so AdminLayout badge always works
+            'unreadMessages'   => fn () => Auth::check()
+                ? Message::where('is_read', false)->count()
+                : 0,
             'ziggy'  => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

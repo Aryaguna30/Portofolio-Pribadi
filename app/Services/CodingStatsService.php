@@ -30,8 +30,8 @@ class CodingStatsService
      */
     private function fetchFromGitHub(): ?array
     {
-        $username = env('GITHUB_USERNAME');
-        $token    = env('GITHUB_TOKEN');
+        $username = config('services.github.username');
+        $token    = config('services.github.token');
 
         if (empty($username)) {
             Log::warning('CodingStatsService: GITHUB_USERNAME is not set.');

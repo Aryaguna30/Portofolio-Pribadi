@@ -46,12 +46,17 @@ return Application::configure(basePath: dirname(__DIR__))
                 return null;
             }
 
+            // Only intercept actual 5xx server errors, not auth/validation errors
             $statusCode = method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500;
 
-            if ($statusCode >= 500) {
-                return Inertia::render('Errors/500')
-                    ->toResponse($request)
-                    ->setStatusCode(500);
+            if ($statusCode >= 500 && $statusCode < 600) {
+                // Only render Inertia error page for non-Inertia requests
+                // Inertia handles its own error display
+                if (! $request->header('X-Inertia')) {
+                    return Inertia::render('Errors/500')
+                        ->toResponse($request)
+                        ->setStatusCode(500);
+                }
             }
 
             return null;

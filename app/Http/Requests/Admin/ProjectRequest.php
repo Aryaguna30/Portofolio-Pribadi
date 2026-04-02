@@ -24,8 +24,8 @@ class ProjectRequest extends FormRequest
         return [
             'title'       => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'tech_stack'  => ['nullable', 'array'],
-            'tech_stack.*' => ['string'],
+            'tech_stack'  => ['nullable', 'array', 'max:20'],
+            'tech_stack.*' => ['string', 'max:100'],
             'demo_url'    => ['nullable', 'url', 'max:500'],
             'repo_url'    => ['nullable', 'url', 'max:500'],
             'is_published' => ['boolean'],

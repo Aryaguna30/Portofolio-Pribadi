@@ -5,12 +5,20 @@ namespace App\Services;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class FileStorageService
 {
+    private ImageManager $imageManager;
+
+    public function __construct()
+    {
+        $this->imageManager = new ImageManager(new Driver());
+    }
+
     /**
-     * Convert an uploaded image to WebP and store it.
+     * Convert an uploaded image to WebP and store it on the public disk.
      *
      * @param  UploadedFile  $file
      * @param  string  $directory  Subdirectory under storage/app/public (e.g. "thumbnails")
@@ -18,10 +26,10 @@ class FileStorageService
      */
     public function storeWebP(UploadedFile $file, string $directory): string
     {
-        $filename = Str::uuid() . '.webp';
+        $filename     = Str::uuid() . '.webp';
         $relativePath = $directory . '/' . $filename;
 
-        $image = Image::read($file->getRealPath());
+        $image   = $this->imageManager->read($file->getRealPath());
         $encoded = $image->toWebp(85);
 
         Storage::disk('public')->put($relativePath, $encoded);

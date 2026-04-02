@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-layout min-h-screen flex" :data-theme="theme">
+  <div class="admin-layout min-h-screen flex">
     <!-- Sidebar -->
     <aside
       class="admin-sidebar"
@@ -9,7 +9,7 @@
       <!-- Logo -->
       <div class="admin-sidebar__logo">
         <span class="logo-bracket">&lt;</span>
-        <span class="logo-text">AF</span>
+        <span class="logo-text">NA</span>
         <span class="logo-bracket">/&gt;</span>
         <span class="admin-sidebar__logo-label">Admin</span>
       </div>

@@ -10,11 +10,19 @@ class MessageController extends Controller
 {
     public function index()
     {
-        $messages    = Message::latest()->get();
+        $paginator   = Message::latest()->paginate(25);
         $unreadCount = Message::where('is_read', false)->count();
 
         return Inertia::render('Admin/Messages/Index', [
-            'messages'    => $messages,
+            'messages'    => $paginator->items(),
+            'pagination'  => [
+                'current_page' => $paginator->currentPage(),
+                'last_page'    => $paginator->lastPage(),
+                'per_page'     => $paginator->perPage(),
+                'total'        => $paginator->total(),
+                'next_page_url'  => $paginator->nextPageUrl(),
+                'prev_page_url'  => $paginator->previousPageUrl(),
+            ],
             'unreadCount' => $unreadCount,
         ]);
     }

@@ -155,6 +155,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { gsap } from 'gsap';
+import DOMPurify from 'dompurify';
 
 // ── Props ──────────────────────────────────────────────────────────────────
 const props = defineProps({
@@ -191,11 +192,12 @@ const stackTechs = ['Laravel', 'Vue.js 3', 'Inertia.js', 'Tailwind', 'MySQL'];
 // ── Typing prefix (locale-aware) ───────────────────────────────────────────
 const typingPrefix = computed(() => locale.value === 'en' ? 'A ' : 'Seorang ');
 
-// ── Sanitized description (basic XSS guard — allow only safe tags) ─────────
+// ── Sanitized description (DOMPurify — allow only safe inline tags) ────────
 const sanitizedDescription = computed(() => {
-  // Allow only <strong>, <br>, <em> tags
-  return props.description
-    .replace(/<(?!\/?(?:strong|br|em)\b)[^>]*>/gi, '');
+  return DOMPurify.sanitize(props.description, {
+    ALLOWED_TAGS: ['strong', 'br', 'em'],
+    ALLOWED_ATTR: [],
+  });
 });
 
 // ── Typing Animation ───────────────────────────────────────────────────────

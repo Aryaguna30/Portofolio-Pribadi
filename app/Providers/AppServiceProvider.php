@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use HTMLPurifier;
+use HTMLPurifier_Config;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -14,7 +16,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Register HTMLPurifier as a singleton so ProjectController can call app('purifier')
+        $this->app->singleton('purifier', function () {
+            $config = HTMLPurifier_Config::createDefault();
+            $config->set('HTML.Allowed', 'p,br,strong,em,ul,ol,li,a[href|target|rel],h2,h3,h4,blockquote,code,pre');
+            $config->set('HTML.TargetBlank', true);
+            $config->set('HTML.Nofollow', true);
+            $config->set('URI.AllowedSchemes', ['http' => true, 'https' => true]);
+            $config->set('Cache.SerializerPath', storage_path('app/purifier'));
+            return new HTMLPurifier($config);
+        });
     }
 
     /**

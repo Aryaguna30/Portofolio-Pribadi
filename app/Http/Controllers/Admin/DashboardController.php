@@ -13,9 +13,11 @@ class DashboardController extends Controller
     public function index(): Response
     {
         return Inertia::render('Admin/Dashboard', [
-            'totalProjects'  => Project::where('is_published', true)->count(),
-            'totalMessages'  => Message::count(),
-            'unreadMessages' => Message::where('is_read', false)->count(),
+            'stats' => [
+                'totalProjects'  => Project::count(),
+                'totalMessages'  => Message::count(),
+                'unreadMessages' => Message::where('is_read', false)->count(),
+            ],
         ]);
     }
 }

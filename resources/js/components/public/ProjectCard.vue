@@ -21,10 +21,10 @@
 
     <!-- Thumbnail -->
     <div class="relative aspect-video overflow-hidden" aria-hidden="true">
-      <!-- WebP image (when thumbnail_path is provided) -->
+      <!-- WebP image (when thumbnail_url is provided) -->
       <img
-        v-if="project.thumbnail_path"
-        :src="project.thumbnail_path"
+        v-if="project.thumbnail_url"
+        :src="project.thumbnail_url"
         :alt="project.title"
         loading="lazy"
         class="w-full h-full object-cover"
