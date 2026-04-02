@@ -1,0 +1,117 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "stats": "Stats",
+    "contact": "Contact",
+    "downloadCv": "Download CV",
+    "cvNotAvailable": "CV not available"
+  },
+  "hero": {
+    "badge": "Available for work",
+    "greeting": "Hi, I'm",
+    "cta": {
+      "portfolio": "View Portfolio",
+      "contact": "Contact Me"
+    },
+    "stack": "Tech Stack",
+    "scrollDown": "Scroll"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Who",
+    "subtitleAccent": "Am I?",
+    "bio1": "I am a Full-Stack Web Developer with 3+ years of experience building modern, scalable, and performant web applications.",
+    "bio2": "I believe good code is not just code that runs — but code that is easy to read, maintain, and extend by a team.",
+    "tabs": {
+      "education": "Education",
+      "experience": "Experience"
+    },
+    "stats": {
+      "years": "Years Experience",
+      "projects": "Projects Done",
+      "commits": "Total Commits"
+    }
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Selected",
+    "subtitleAccent": "Projects",
+    "empty": "No projects to display yet",
+    "viewDemo": "View Demo",
+    "viewRepo": "View Repository",
+    "close": "Close",
+    "techStack": "Tech Stack"
+  },
+  "stats": {
+    "title": "Stats",
+    "subtitle": "Coding",
+    "subtitleAccent": "Activity",
+    "unavailable": "Statistics data is temporarily unavailable",
+    "loading": "Loading stats...",
+    "languages": "Programming Languages",
+    "commits": "Total Commits",
+    "repositories": "Repositories",
+    "streak": "Day Streak",
+    "projectsDone": "Projects Done",
+    "yearsExp": "Years Experience"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Let's",
+    "subtitleAccent": "Collaborate",
+    "desc": "Open to full-time job opportunities, freelance projects, or just chatting about technology.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Full name",
+      "email": "Email",
+      "emailPlaceholder": "email{'@'}example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "Message subject",
+      "message": "Message",
+      "messagePlaceholder": "Write your message...",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent! I will get back to you soon."
+    },
+    "social": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "email": "Email"
+    }
+  },
+  "footer": {
+    "copyright": "Built with ❤️ using Laravel & Vue.js",
+    "backToTop": "Back to top"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page Not Found",
+      "message": "Sorry, the page you are looking for does not exist or has been moved.",
+      "back": "Back to Home"
+    },
+    "serverError": {
+      "title": "Server Error",
+      "message": "Sorry, something went wrong on the server. Please try again later."
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "close": "Close",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "messages": "Messages",
+    "landing": "Landing Page",
+    "logout": "Logout",
+    "unread": "Unread"
+  }
+}

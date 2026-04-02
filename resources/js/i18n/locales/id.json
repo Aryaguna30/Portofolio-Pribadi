@@ -1,0 +1,117 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "portfolio": "Portofolio",
+    "stats": "Statistik",
+    "contact": "Kontak",
+    "downloadCv": "Unduh CV",
+    "cvNotAvailable": "CV belum tersedia"
+  },
+  "hero": {
+    "badge": "Tersedia untuk bekerja",
+    "greeting": "Halo, saya",
+    "cta": {
+      "portfolio": "Lihat Portofolio",
+      "contact": "Hubungi Saya"
+    },
+    "stack": "Tech Stack",
+    "scrollDown": "Scroll ke bawah"
+  },
+  "about": {
+    "title": "Tentang Saya",
+    "subtitle": "Siapa",
+    "subtitleAccent": "Saya?",
+    "bio1": "Saya adalah Full-Stack Web Developer dengan pengalaman 3+ tahun membangun aplikasi web modern yang scalable dan performant.",
+    "bio2": "Saya percaya kode yang baik bukan hanya yang berjalan — tetapi yang mudah dibaca, dipelihara, dan dikembangkan oleh tim.",
+    "tabs": {
+      "education": "Pendidikan",
+      "experience": "Pengalaman"
+    },
+    "stats": {
+      "years": "Tahun Pengalaman",
+      "projects": "Proyek Selesai",
+      "commits": "Total Commits"
+    }
+  },
+  "portfolio": {
+    "title": "Portofolio",
+    "subtitle": "Proyek",
+    "subtitleAccent": "Pilihan",
+    "empty": "Belum ada proyek yang ditampilkan",
+    "viewDemo": "Lihat Demo",
+    "viewRepo": "Lihat Repositori",
+    "close": "Tutup",
+    "techStack": "Tech Stack"
+  },
+  "stats": {
+    "title": "Statistik",
+    "subtitle": "Aktivitas",
+    "subtitleAccent": "Coding",
+    "unavailable": "Data statistik sementara tidak tersedia",
+    "loading": "Memuat statistik...",
+    "languages": "Bahasa Pemrograman",
+    "commits": "Total Commits",
+    "repositories": "Repositori",
+    "streak": "Hari Berturut-turut",
+    "projectsDone": "Proyek Selesai",
+    "yearsExp": "Tahun Pengalaman"
+  },
+  "contact": {
+    "title": "Kontak",
+    "subtitle": "Mari",
+    "subtitleAccent": "Berkolaborasi",
+    "desc": "Terbuka untuk peluang kerja full-time, proyek freelance, atau sekadar ngobrol soal teknologi.",
+    "form": {
+      "name": "Nama",
+      "namePlaceholder": "Nama lengkap",
+      "email": "Email",
+      "emailPlaceholder": "contoh{'@'}email.com",
+      "subject": "Subjek",
+      "subjectPlaceholder": "Perihal pesan",
+      "message": "Pesan",
+      "messagePlaceholder": "Tulis pesan Anda...",
+      "send": "Kirim Pesan",
+      "sending": "Mengirim...",
+      "success": "Pesan terkirim! Saya akan segera menghubungi Anda."
+    },
+    "social": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "email": "Email"
+    }
+  },
+  "footer": {
+    "copyright": "Dibangun dengan ❤️ menggunakan Laravel & Vue.js",
+    "backToTop": "Kembali ke atas"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Halaman Tidak Ditemukan",
+      "message": "Maaf, halaman yang Anda cari tidak ada atau telah dipindahkan.",
+      "back": "Kembali ke Beranda"
+    },
+    "serverError": {
+      "title": "Terjadi Kesalahan Server",
+      "message": "Maaf, terjadi kesalahan pada server. Silakan coba lagi nanti."
+    }
+  },
+  "common": {
+    "loading": "Memuat...",
+    "close": "Tutup",
+    "confirm": "Konfirmasi",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "edit": "Edit",
+    "delete": "Hapus",
+    "add": "Tambah"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "projects": "Proyek",
+    "messages": "Pesan",
+    "landing": "Landing Page",
+    "logout": "Keluar",
+    "unread": "Belum Dibaca"
+  }
+}

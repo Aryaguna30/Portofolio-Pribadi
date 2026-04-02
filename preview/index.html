@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Ahmad Fauzi — Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+<div class="noise"></div>
+
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="#" class="header__logo">
+      <span class="logo-bracket">&lt;</span><span class="logo-text">AF</span><span class="logo-bracket">/&gt;</span>
+      <span class="logo-name">Ahmad<span class="logo-name-accent">Fauzi</span></span>
+    </a>
+    <nav class="header__nav" id="nav">
+      <a href="#about"     class="nav-link">Tentang</a>
+      <a href="#portfolio" class="nav-link">Portofolio</a>
+      <a href="#stats"     class="nav-link">Statistik</a>
+      <a href="#contact"   class="nav-link">Kontak</a>
+    </nav>
+    <div class="header__actions">
+      <button class="btn-icon" id="langToggle" aria-label="Ganti bahasa"><span id="langLabel">ID</span></button>
+      <button class="btn-icon" id="themeToggle" aria-label="Ganti tema">
+        <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a href="#" class="btn btn--glow" aria-label="Unduh CV">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Unduh CV
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <canvas id="particleCanvas"></canvas>
+  <div class="hero__orb hero__orb--1"></div>
+  <div class="hero__orb hero__orb--2"></div>
+  <div class="hero__orb hero__orb--3"></div>
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <div class="hero__badge reveal-up">
+        <span class="hero__badge-dot"></span>Available for work
+      </div>
+      <h1 class="hero__name reveal-up" style="--d:.1s">
+        Ahmad<br/><span class="hero__name-accent">Fauzi</span>
+      </h1>
+      <div class="hero__typing-row reveal-up" style="--d:.2s">
+        <span id="typingPrefix">Seorang </span>
+        <span class="hero__typing" id="typingText"></span>
+        <span class="hero__cursor">_</span>
+      </div>
+      <p class="hero__desc reveal-up" style="--d:.3s">
+        Membangun aplikasi web yang cepat, aman, dan elegan.<br/>
+        Spesialis <strong>Laravel</strong> &amp; <strong>Vue.js</strong> — dari arsitektur hingga pixel.
+      </p>
+      <div class="hero__actions reveal-up" style="--d:.4s">
+        <a href="#portfolio" class="btn btn--glow">Lihat Portofolio <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#contact" class="btn btn--outline">Hubungi Saya</a>
+      </div>
+      <div class="hero__stack reveal-up" style="--d:.5s">
+        <span class="stack-pill">Laravel</span>
+        <span class="stack-pill">Vue.js 3</span>
+        <span class="stack-pill">Inertia.js</span>
+        <span class="stack-pill">Tailwind</span>
+        <span class="stack-pill">MySQL</span>
+      </div>
+    </div>
+    <div class="hero__visual reveal-up" style="--d:.2s">
+      <div class="hero__card tilt-card">
+        <div class="hero__card-glow"></div>
+        <div class="hero__card-header">
+          <span class="dot dot--red"></span><span class="dot dot--yellow"></span><span class="dot dot--green"></span>
+          <span class="hero__card-file">Developer.php</span>
+        </div>
+        <pre class="hero__code"><code><span class="c-comment">// Ahmad Fauzi — 2025</span>
+<span class="c-purple">class</span> <span class="c-yellow">Developer</span> <span class="c-white">{</span>
+
+  <span class="c-blue">public</span> <span class="c-purple">string</span> <span class="c-white">$name</span>
+    = <span class="c-green">'Ahmad Fauzi'</span><span class="c-white">;</span>
+
+  <span class="c-blue">public</span> <span class="c-purple">array</span> <span class="c-white">$stack</span> = [
+    <span class="c-green">'Laravel'</span><span class="c-white">,</span> <span class="c-green">'Vue.js'</span><span class="c-white">,</span>
+    <span class="c-green">'Inertia'</span><span class="c-white">,</span> <span class="c-green">'MySQL'</span><span class="c-white">,</span>
+  ]<span class="c-white">;</span>
+
+  <span class="c-blue">public function</span> <span class="c-yellow">passion</span><span class="c-white">():</span> <span class="c-purple">string</span>
+  <span class="c-white">{</span>
+    <span class="c-blue">return</span> <span class="c-green">'Clean &amp; Scalable'</span><span class="c-white">;</span>
+  <span class="c-white">}</span>
+<span class="c-white">}</span></code></pre>
+      </div>
+      <div class="float-badge float-badge--1"><span>&#9889;</span> 3+ Tahun</div>
+      <div class="float-badge float-badge--2"><span>&#128640;</span> 12 Proyek</div>
+      <div class="float-badge float-badge--3"><span>&#11088;</span> Clean Code</div>
+    </div>
+  </div>
+  <div class="hero__scroll">
+    <div class="hero__scroll-mouse"><div class="hero__scroll-wheel"></div></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="section__label reveal-up">Tentang Saya</div>
+    <h2 class="section__title reveal-up" style="--d:.1s">Siapa <span class="gradient-text">Saya?</span></h2>
+    <div class="about__grid">
+      <div class="about__bio reveal-up" style="--d:.15s">
+        <p>Saya adalah <strong>Full-Stack Web Developer</strong> dengan pengalaman 3+ tahun membangun aplikasi web modern yang scalable dan performant.</p>
+        <p>Saya percaya kode yang baik bukan hanya yang berjalan — tetapi yang mudah dibaca, dipelihara, dan dikembangkan oleh tim.</p>
+        <div class="about__stats">
+          <div class="about__stat"><span class="about__stat-num gradient-text">3+</span><span>Tahun Exp.</span></div>
+          <div class="about__stat"><span class="about__stat-num gradient-text">12</span><span>Proyek</span></div>
+          <div class="about__stat"><span class="about__stat-num gradient-text">1.2K+</span><span>Commits</span></div>
+        </div>
+        <div class="skills__grid">
+          <div class="skill-badge"><span>&#9889;</span>Laravel</div>
+          <div class="skill-badge"><span>&#128154;</span>Vue.js 3</div>
+          <div class="skill-badge"><span>&#128279;</span>Inertia.js</div>
+          <div class="skill-badge"><span>&#127912;</span>Tailwind</div>
+          <div class="skill-badge"><span>&#128451;</span>MySQL</div>
+          <div class="skill-badge"><span>&#128024;</span>PHP 8</div>
+          <div class="skill-badge"><span>&#128230;</span>Docker</div>
+          <div class="skill-badge"><span>&#128295;</span>Git</div>
+        </div>
+      </div>
+      <div class="timeline-wrap reveal-up" style="--d:.2s">
+        <div class="timeline__tabs">
+          <button class="timeline__tab active" data-tab="education">&#127891; Pendidikan</button>
+          <button class="timeline__tab" data-tab="experience">&#128188; Pengalaman</button>
+        </div>
+        <div class="timeline" id="tab-education">
+          <div class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__body">
+              <span class="timeline__year">2020 — 2024</span>
+              <h4>S1 Teknik Informatika</h4>
+              <p class="timeline__place">Universitas Negeri Semarang</p>
+              <p class="timeline__desc">Fokus rekayasa perangkat lunak. IPK 3.72/4.00</p>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__body">
+              <span class="timeline__year">2017 — 2020</span>
+              <h4>Rekayasa Perangkat Lunak</h4>
+              <p class="timeline__place">SMK Negeri 1 Semarang</p>
+              <p class="timeline__desc">Jurusan RPL, dasar pemrograman dan web development.</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline hidden" id="tab-experience">
+          <div class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__body">
+              <span class="timeline__year">2023 — Sekarang</span>
+              <h4>Full-Stack Developer</h4>
+              <p class="timeline__place">PT. Teknologi Maju Indonesia</p>
+              <p class="timeline__desc">Membangun sistem ERP Laravel + Vue.js untuk 500+ pengguna aktif.</p>
+            </div>
+          </div>
+          <div class="timeline__item">
+            <div class="timeline__dot"></div>
+            <div class="timeline__body">
+              <span class="timeline__year">2022 — 2023</span>
+              <h4>Web Developer Intern</h4>
+              <p class="timeline__place">CV. Digital Kreatif</p>
+              <p class="timeline__desc">Mengembangkan fitur e-commerce dan CMS menggunakan Laravel.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark" id="portfolio">
+  <div class="container">
+    <div class="section__label reveal-up">Portofolio</div>
+    <h2 class="section__title reveal-up" style="--d:.1s">Proyek <span class="gradient-text">Pilihan</span></h2>
+    <div class="portfolio__grid">
+      <article class="project-card reveal-up" style="--d:.1s" onclick="openModal(0)">
+        <div class="project-card__thumb" style="--g:linear-gradient(135deg,#7c3aed,#4f46e5)">
+          <span class="project-card__label">POS</span>
+          <div class="project-card__shine"></div>
+        </div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="tag">Laravel</span><span class="tag">Vue.js</span><span class="tag">MySQL</span></div>
+          <h3>Sistem Point of Sales</h3>
+          <p>Aplikasi kasir modern dengan manajemen stok, laporan real-time, dan multi-kasir.</p>
+          <div class="project-card__arrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+      </article>
+      <article class="project-card project-card--featured reveal-up" style="--d:.15s" onclick="openModal(1)">
+        <div class="project-card__thumb" style="--g:linear-gradient(135deg,#059669,#0891b2)">
+          <span class="project-card__label">ROOM</span>
+          <div class="project-card__shine"></div>
+        </div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="tag">Laravel</span><span class="tag">Inertia.js</span><span class="tag">Tailwind</span></div>
+          <h3>Sistem Peminjaman Ruangan</h3>
+          <p>Platform booking dengan alur persetujuan multi-level, notifikasi email, dan kalender interaktif.</p>
+          <div class="project-card__arrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+      </article>
+      <article class="project-card reveal-up" style="--d:.2s" onclick="openModal(2)">
+        <div class="project-card__thumb" style="--g:linear-gradient(135deg,#d97706,#dc2626)">
+          <span class="project-card__label">API</span>
+          <div class="project-card__shine"></div>
+        </div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="tag">Laravel</span><span class="tag">REST API</span><span class="tag">PostgreSQL</span></div>
+          <h3>REST API E-Commerce</h3>
+          <p>Backend API lengkap dengan JWT, payment gateway Midtrans, dan dokumentasi Swagger.</p>
+          <div class="project-card__arrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stats">
+  <div class="container">
+    <div class="section__label reveal-up">Statistik</div>
+    <h2 class="section__title reveal-up" style="--d:.1s">Aktivitas <span class="gradient-text">Coding</span></h2>
+    <div class="stats__grid">
+      <div class="stats__lang-card glass reveal-up" style="--d:.1s">
+        <h3 class="stats__card-title">Bahasa Pemrograman</h3>
+        <div class="lang-bars">
+          <div class="lang-bar"><div class="lang-bar__info"><span>PHP</span><span class="lang-bar__pct">48%</span></div><div class="lang-bar__track"><div class="lang-bar__fill" style="--w:48%;--c:#7c3aed"></div></div></div>
+          <div class="lang-bar"><div class="lang-bar__info"><span>JavaScript</span><span class="lang-bar__pct">32%</span></div><div class="lang-bar__track"><div class="lang-bar__fill" style="--w:32%;--c:#f59e0b"></div></div></div>
+          <div class="lang-bar"><div class="lang-bar__info"><span>Vue SFC</span><span class="lang-bar__pct">12%</span></div><div class="lang-bar__track"><div class="lang-bar__fill" style="--w:12%;--c:#10b981"></div></div></div>
+          <div class="lang-bar"><div class="lang-bar__info"><span>CSS/Blade</span><span class="lang-bar__pct">8%</span></div><div class="lang-bar__track"><div class="lang-bar__fill" style="--w:8%;--c:#3b82f6"></div></div></div>
+        </div>
+      </div>
+      <div class="stats__numbers">
+        <div class="stat-card glass reveal-up" style="--d:.15s"><span class="stat-card__num gradient-text" data-target="1247">0</span><span class="stat-card__label">Total Commits</span></div>
+        <div class="stat-card glass reveal-up" style="--d:.2s"><span class="stat-card__num gradient-text" data-target="38">0</span><span class="stat-card__label">Repositories</span></div>
+        <div class="stat-card glass reveal-up" style="--d:.25s"><span class="stat-card__num gradient-text" data-target="12">0</span><span class="stat-card__label">Proyek Selesai</span></div>
+        <div class="stat-card glass reveal-up" style="--d:.3s"><span class="stat-card__num gradient-text" data-target="3">0</span><span class="stat-card__label">Tahun Exp.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark" id="contact">
+  <div class="container">
+    <div class="section__label reveal-up">Kontak</div>
+    <h2 class="section__title reveal-up" style="--d:.1s">Mari <span class="gradient-text">Berkolaborasi</span></h2>
+    <div class="contact__grid">
+      <div class="contact__info reveal-up" style="--d:.15s">
+        <p class="contact__desc">Terbuka untuk peluang kerja full-time, proyek freelance, atau sekadar ngobrol soal teknologi.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <div class="social-link__icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+            <div><strong>LinkedIn</strong><span>Ahmad Fauzi</span></div>
+          </a>
+          <a href="#" class="social-link" aria-label="GitHub">
+            <div class="social-link__icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+            <div><strong>GitHub</strong><span>@ahmadfauzi</span></div>
+          </a>
+          <a href="mailto:ahmad@example.com" class="social-link" aria-label="Email">
+            <div class="social-link__icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><strong>Email</strong><span>ahmad@example.com</span></div>
+          </a>
+        </div>
+      </div>
+      <form class="contact__form glass reveal-up" style="--d:.2s" id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group"><label for="fname">Nama</label><input class="form-input" type="text" id="fname" placeholder="Nama lengkap" required/></div>
+          <div class="form-group"><label for="femail">Email</label><input class="form-input" type="email" id="femail" placeholder="email@contoh.com" required/></div>
+        </div>
+        <div class="form-group"><label for="fsubject">Subjek</label><input class="form-input" type="text" id="fsubject" placeholder="Perihal pesan" required/></div>
+        <div class="form-group"><label for="fmessage">Pesan</label><textarea class="form-input form-textarea" id="fmessage" placeholder="Tulis pesan Anda..." required></textarea></div>
+        <input type="text" name="_hp" style="display:none" tabindex="-1" autocomplete="off"/>
+        <button type="submit" class="btn btn--glow btn--full" id="submitBtn">Kirim Pesan <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        <div class="form-success" id="formSuccess" style="display:none">&#9989; Pesan terkirim! Saya akan segera menghubungi Anda.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__left">
+      <a href="#" class="footer__logo">
+        <span class="logo-bracket">&lt;</span><span class="logo-text">AF</span><span class="logo-bracket">/&gt;</span>
+      </a>
+    </div>
+    <p class="footer__copy">&#169; 2025 <span class="gradient-text">Ahmad Fauzi</span>. Dibangun dengan &#10084;&#65039; menggunakan Laravel &amp; Vue.js</p>
+    <div class="footer__right">
+      <a href="#home" class="footer__top" aria-label="Kembali ke atas"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal glass">
+    <button class="modal__close" id="modalClose" aria-label="Tutup"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div class="modal__thumb" id="modalThumb"></div>
+    <div class="modal__body">
+      <h2 class="modal__title" id="modalTitle"></h2>
+      <div class="modal__tags" id="modalTags"></div>
+      <p class="modal__desc" id="modalDesc"></p>
+      <div class="modal__links" id="modalLinks"></div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
