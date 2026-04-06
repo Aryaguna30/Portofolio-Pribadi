@@ -35,7 +35,22 @@ class LandingPageController extends Controller
                 'github'   => SiteSetting::get('social_github', ''),
                 'email'    => SiteSetting::get('social_email', ''),
             ],
-            'timelineEntries' => TimelineEntry::orderBy('sort_order')->get(),
+            'timelineEntries' => TimelineEntry::orderBy('sort_order')->get()->map(function ($entry) {
+                $locale = app()->getLocale();
+                return [
+                    'id'          => $entry->id,
+                    'type'        => $entry->type,
+                    'institution' => $entry->getTranslation('institution', $locale, false)
+                                     ?: ($entry->getTranslations('institution')['en'] ?? ''),
+                    'role'        => $entry->getTranslation('role', $locale, false)
+                                     ?: ($entry->getTranslations('role')['en'] ?? ''),
+                    'description' => $entry->getTranslation('description', $locale, false)
+                                     ?: ($entry->getTranslations('description')['en'] ?? null),
+                    'start_year'  => $entry->start_year,
+                    'end_year'    => $entry->end_year,
+                    'sort_order'  => $entry->sort_order,
+                ];
+            }),
             'skills'          => Skill::orderBy('sort_order')->get(),
             'currentCvPath'   => SiteSetting::get('cv_file_path', null),
         ]);
