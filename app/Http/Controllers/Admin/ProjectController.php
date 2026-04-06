@@ -41,7 +41,7 @@ class ProjectController extends Controller
             'thumbnails'
         );
 
-        $data['description'] = app('purifier')->purify($data['description'] ?? '');
+        $data['description'] = $this->purifyHtml($data['description'] ?? '');
 
         unset($data['thumbnail']);
 
@@ -70,7 +70,7 @@ class ProjectController extends Controller
             );
         }
 
-        $data['description'] = app('purifier')->purify($data['description'] ?? $project->description);
+        $data['description'] = $this->purifyHtml($data['description'] ?? $project->description);
 
         unset($data['thumbnail']);
 
@@ -87,5 +87,17 @@ class ProjectController extends Controller
 
         return redirect()->route('admin.projects.index')
             ->with('success', 'Proyek berhasil dihapus.');
+    }
+
+    private function purifyHtml(string $html): string
+    {
+        $config = \HTMLPurifier_Config::createDefault();
+        $config->set('HTML.Allowed', 'p,br,strong,em,ul,ol,li,a[href|target|rel],h2,h3,h4,blockquote,code,pre');
+        $config->set('HTML.TargetBlank', true);
+        $config->set('HTML.Nofollow', true);
+        $config->set('URI.AllowedSchemes', ['http' => true, 'https' => true]);
+        $config->set('Cache.SerializerPath', storage_path('app/purifier'));
+
+        return (new \HTMLPurifier($config))->purify($html);
     }
 }
