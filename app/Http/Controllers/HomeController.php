@@ -22,21 +22,7 @@ class HomeController extends Controller
             ->orderBy('sort_order')
             ->get();
 
-        $timelineEntries = TimelineEntry::orderBy('sort_order')->get()->map(function ($entry) {
-            return [
-                'id'          => $entry->id,
-                'type'        => $entry->type,
-                'institution' => $entry->getTranslation('institution', app()->getLocale(), false)
-                                 ?: ($entry->getTranslations('institution')['en'] ?? ''),
-                'role'        => $entry->getTranslation('role', app()->getLocale(), false)
-                                 ?: ($entry->getTranslations('role')['en'] ?? ''),
-                'description' => $entry->getTranslation('description', app()->getLocale(), false)
-                                 ?: ($entry->getTranslations('description')['en'] ?? null),
-                'start_year'  => $entry->start_year,
-                'end_year'    => $entry->end_year,
-                'sort_order'  => $entry->sort_order,
-            ];
-        });
+        $timelineEntries = TimelineEntry::orderBy('sort_order')->get();
 
         $skills = Skill::orderBy('sort_order')->get();
 

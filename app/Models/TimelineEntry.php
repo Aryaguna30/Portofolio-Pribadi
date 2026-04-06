@@ -3,14 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
 
 class TimelineEntry extends Model
 {
-    use HasTranslations;
-
-    public array $translatable = ['institution', 'role', 'description'];
-
     protected $fillable = [
         'type',
         'institution',
@@ -20,4 +15,13 @@ class TimelineEntry extends Model
         'description',
         'sort_order',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'start_year' => 'integer',
+            'end_year'   => 'integer',
+            'sort_order' => 'integer',
+        ];
+    }
 }
