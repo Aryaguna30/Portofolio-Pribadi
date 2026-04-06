@@ -96,7 +96,12 @@ class ProjectController extends Controller
         $config->set('HTML.TargetBlank', true);
         $config->set('HTML.Nofollow', true);
         $config->set('URI.AllowedSchemes', ['http' => true, 'https' => true]);
-        $config->set('Cache.SerializerPath', storage_path('app/purifier'));
+
+        $cachePath = storage_path('app/purifier');
+        if (!is_dir($cachePath)) {
+            mkdir($cachePath, 0755, true);
+        }
+        $config->set('Cache.SerializerPath', $cachePath);
 
         return (new \HTMLPurifier($config))->purify($html);
     }

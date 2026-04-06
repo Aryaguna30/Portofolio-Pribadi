@@ -29,10 +29,20 @@ class FileStorageService
         $filename     = Str::uuid() . '.webp';
         $relativePath = $directory . '/' . $filename;
 
-        $image   = $this->imageManager->read($file->getRealPath());
-        $encoded = $image->toWebp(85);
-
-        Storage::disk('public')->put($relativePath, $encoded);
+        try {
+            $image   = $this->imageManager->read($file->getRealPath());
+            $encoded = $image->toWebp(85);
+            Storage::disk('public')->put($relativePath, $encoded);
+        } catch (\Throwable $e) {
+            // Fallback: store original file if WebP conversion fails
+            $ext          = $file->getClientOriginalExtension() ?: 'jpg';
+            $relativePath = $directory . '/' . Str::uuid() . '.' . $ext;
+            Storage::disk('public')->putFileAs(
+                $directory,
+                $file,
+                basename($relativePath)
+            );
+        }
 
         return $relativePath;
     }
