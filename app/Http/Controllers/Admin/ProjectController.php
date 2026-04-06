@@ -36,22 +36,12 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
-        // Convert thumbnail to WebP
         $data['thumbnail_path'] = $this->fileStorage->storeWebP(
             $request->file('thumbnail'),
             'thumbnails'
         );
 
-        // Sanitize HTML description
-        $description = $data['description'] ?? '';
-        if (is_array($description)) {
-            foreach ($description as $locale => $html) {
-                $description[$locale] = app('purifier')->purify($html);
-            }
-        } else {
-            $description = app('purifier')->purify($description);
-        }
-        $data['description'] = $description;
+        $data['description'] = app('purifier')->purify($data['description'] ?? '');
 
         unset($data['thumbnail']);
 
@@ -72,7 +62,6 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
-        // Replace thumbnail if a new one is uploaded
         if ($request->hasFile('thumbnail')) {
             $this->fileStorage->deleteFile($project->thumbnail_path);
             $data['thumbnail_path'] = $this->fileStorage->storeWebP(
@@ -81,16 +70,7 @@ class ProjectController extends Controller
             );
         }
 
-        // Sanitize HTML description
-        $description = $data['description'] ?? $project->description;
-        if (is_array($description)) {
-            foreach ($description as $locale => $html) {
-                $description[$locale] = app('purifier')->purify($html);
-            }
-        } else {
-            $description = app('purifier')->purify($description);
-        }
-        $data['description'] = $description;
+        $data['description'] = app('purifier')->purify($data['description'] ?? $project->description);
 
         unset($data['thumbnail']);
 

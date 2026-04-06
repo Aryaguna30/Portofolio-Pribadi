@@ -5,13 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Translatable\HasTranslations;
 
 class Project extends Model
 {
-    use HasTranslations, SoftDeletes;
-
-    public array $translatable = ['title', 'description'];
+    use SoftDeletes;
 
     protected $fillable = [
         'title',
@@ -32,10 +29,6 @@ class Project extends Model
         ];
     }
 
-    /**
-     * Full public URL for the thumbnail, or null if not set.
-     * Appended automatically so frontend always gets a ready-to-use URL.
-     */
     protected function thumbnailUrl(): Attribute
     {
         return Attribute::make(
