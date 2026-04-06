@@ -33,6 +33,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Force HTTPS in production
+        if ($this->app->environment('production')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         // contact: 3 requests per hour per IP
         RateLimiter::for('contact', function (Request $request) {
             return Limit::perHour(3)->by($request->ip())
