@@ -5,69 +5,28 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SkillRequest;
 use App\Models\Skill;
-use Illuminate\Http\JsonResponse;
-use Inertia\Inertia;
-use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
 
 class SkillController extends Controller
 {
-    /**
-     * Display a listing of all skills.
-     *
-     * Requirements: 10.8
-     */
-    public function index(): Response
+    public function store(SkillRequest $request): RedirectResponse
     {
-        return Inertia::render('Admin/Skills', [
-            'skills' => Skill::orderBy('sort_order')->get(),
-        ]);
+        Skill::create($request->validated());
+
+        return back()->with('success', 'Keahlian berhasil ditambahkan.');
     }
 
-    /**
-     * Store a newly created skill.
-     *
-     * Requirements: 10.8
-     */
-    public function store(SkillRequest $request): JsonResponse
-    {
-        $skill = Skill::create($request->validated());
-
-        return response()->json($skill, 201);
-    }
-
-    /**
-     * Display the specified skill.
-     *
-     * Requirements: 10.8
-     */
-    public function show(Skill $skill): Response
-    {
-        return Inertia::render('Admin/Skills', [
-            'skill' => $skill,
-        ]);
-    }
-
-    /**
-     * Update the specified skill.
-     *
-     * Requirements: 10.8
-     */
-    public function update(SkillRequest $request, Skill $skill): JsonResponse
+    public function update(SkillRequest $request, Skill $skill): RedirectResponse
     {
         $skill->update($request->validated());
 
-        return response()->json($skill);
+        return back()->with('success', 'Keahlian berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified skill.
-     *
-     * Requirements: 10.8
-     */
-    public function destroy(Skill $skill): JsonResponse
+    public function destroy(Skill $skill): RedirectResponse
     {
         $skill->delete();
 
-        return response()->json(null, 204);
+        return back()->with('success', 'Keahlian berhasil dihapus.');
     }
 }

@@ -205,8 +205,8 @@
                     {{ entry.type === 'education' ? 'Pendidikan' : 'Pengalaman' }}
                   </span>
                 </td>
-                <td>{{ entry.institution }}</td>
-                <td>{{ entry.role }}</td>
+                <td>{{ trans(entry.institution) }}</td>
+                <td>{{ trans(entry.role) }}</td>
                 <td class="font-mono">{{ entry.start_year }}–{{ entry.end_year ?? 'Sekarang' }}</td>
                 <td>
                   <div class="action-btns">
@@ -419,6 +419,14 @@ const props = defineProps({
   currentCvPath: { type: String, default: null },
 });
 
+// Extract string from translatable field (e.g. {"en": "value"} → "value")
+function trans(val) {
+  if (!val) return '';
+  if (typeof val === 'string') return val;
+  if (typeof val === 'object') return val['id'] ?? val['en'] ?? Object.values(val)[0] ?? '';
+  return String(val);
+}
+
 // ── Hero Form ──────────────────────────────────────────────────
 const heroForm = useForm({
   name: props.hero?.name ?? '',
@@ -494,11 +502,11 @@ function openTimelineForm(entry) {
   if (entry) {
     timelineModal.editing = entry;
     timelineForm.type = entry.type;
-    timelineForm.institution = entry.institution;
-    timelineForm.role = entry.role;
+    timelineForm.institution = trans(entry.institution);
+    timelineForm.role = trans(entry.role);
     timelineForm.start_year = entry.start_year;
     timelineForm.end_year = entry.end_year ?? '';
-    timelineForm.description = entry.description ?? '';
+    timelineForm.description = trans(entry.description) ?? '';
   } else {
     timelineModal.editing = null;
     timelineForm.reset();
