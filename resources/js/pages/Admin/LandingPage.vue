@@ -123,6 +123,54 @@
         </form>
       </section>
 
+      <!-- ── Social Links ─────────────────────────────────────── -->
+      <section class="admin-section">
+        <h2 class="admin-section__title">Social Links</h2>
+        <form @submit.prevent="submitSocial">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="social-linkedin" class="form-label">LinkedIn URL</label>
+              <input
+                id="social-linkedin"
+                v-model="socialForm.linkedin"
+                type="url"
+                class="form-input"
+                :class="{ 'form-input--error': socialForm.errors.linkedin }"
+                placeholder="https://linkedin.com/in/username"
+              />
+              <p v-if="socialForm.errors.linkedin" class="form-error">{{ socialForm.errors.linkedin }}</p>
+            </div>
+            <div class="form-field">
+              <label for="social-github" class="form-label">GitHub URL</label>
+              <input
+                id="social-github"
+                v-model="socialForm.github"
+                type="url"
+                class="form-input"
+                :class="{ 'form-input--error': socialForm.errors.github }"
+                placeholder="https://github.com/username"
+              />
+              <p v-if="socialForm.errors.github" class="form-error">{{ socialForm.errors.github }}</p>
+            </div>
+            <div class="form-field">
+              <label for="social-email" class="form-label">Email</label>
+              <input
+                id="social-email"
+                v-model="socialForm.email"
+                type="email"
+                class="form-input"
+                :class="{ 'form-input--error': socialForm.errors.email }"
+                placeholder="email@example.com"
+              />
+              <p v-if="socialForm.errors.email" class="form-error">{{ socialForm.errors.email }}</p>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--primary" :disabled="socialForm.processing">
+            {{ socialForm.processing ? 'Menyimpan...' : 'Simpan Social Links' }}
+          </button>
+        </form>
+      </section>
+
       <!-- ── Timeline Entries ──────────────────────────────────── -->
       <section class="admin-section">
         <div class="admin-section__header">
@@ -365,6 +413,7 @@ import { useFocusTrap } from '@/composables/useFocusTrap.js';
 
 const props = defineProps({
   hero: { type: Object, default: () => ({}) },
+  socialLinks: { type: Object, default: () => ({}) },
   timelineEntries: { type: Array, default: () => [] },
   skills: { type: Array, default: () => [] },
   currentCvPath: { type: String, default: null },
@@ -387,6 +436,17 @@ function removeProfession(idx) {
 
 function submitHero() {
   heroForm.put(route('admin.landing.hero.update'), { preserveScroll: true });
+}
+
+// ── Social Links Form ──────────────────────────────────────────
+const socialForm = useForm({
+  linkedin: props.socialLinks?.linkedin ?? '',
+  github:   props.socialLinks?.github ?? '',
+  email:    props.socialLinks?.email ?? '',
+});
+
+function submitSocial() {
+  socialForm.put(route('admin.landing.social.update'), { preserveScroll: true });
 }
 
 // ── CV Form ────────────────────────────────────────────────────

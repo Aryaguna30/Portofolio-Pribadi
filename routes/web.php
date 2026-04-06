@@ -47,6 +47,8 @@ Route::middleware(['auth', EnsureAdminAuthenticated::class])
             ->name('landing.index');
         Route::put('/landing/hero', [\App\Http\Controllers\Admin\LandingPageController::class, 'updateHero'])
             ->name('landing.hero.update');
+        Route::put('/landing/social', [\App\Http\Controllers\Admin\LandingPageController::class, 'updateSocialLinks'])
+            ->name('landing.social.update');
         Route::post('/landing/cv', [\App\Http\Controllers\Admin\LandingPageController::class, 'uploadCv'])
             ->name('landing.cv.upload');
         Route::delete('/landing/cv', [\App\Http\Controllers\Admin\LandingPageController::class, 'deleteCv'])

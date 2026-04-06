@@ -30,6 +30,11 @@ class LandingPageController extends Controller
                 'professions' => SiteSetting::get('hero_professions', []),
                 'description' => SiteSetting::get('hero_description', ''),
             ],
+            'socialLinks' => [
+                'linkedin' => SiteSetting::get('social_linkedin', ''),
+                'github'   => SiteSetting::get('social_github', ''),
+                'email'    => SiteSetting::get('social_email', ''),
+            ],
             'timelineEntries' => TimelineEntry::orderBy('sort_order')->get(),
             'skills'          => Skill::orderBy('sort_order')->get(),
             'currentCvPath'   => SiteSetting::get('cv_file_path', null),
@@ -100,5 +105,23 @@ class LandingPageController extends Controller
         }
 
         return back()->with('success', 'CV deleted.');
+    }
+
+    /**
+     * Update social links settings.
+     */
+    public function updateSocialLinks(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'linkedin' => ['nullable', 'string', 'max:255'],
+            'github'   => ['nullable', 'string', 'max:255'],
+            'email'    => ['nullable', 'email', 'max:255'],
+        ]);
+
+        SiteSetting::set('social_linkedin', $validated['linkedin'] ?? '');
+        SiteSetting::set('social_github', $validated['github'] ?? '');
+        SiteSetting::set('social_email', $validated['email'] ?? '');
+
+        return back()->with('success', 'Social links updated.');
     }
 }
