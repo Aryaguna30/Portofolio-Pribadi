@@ -16,7 +16,7 @@ class ContactFormRequest extends FormRequest
     {
         return [
             'name'               => ['required', 'string', 'max:255'],
-            'email'              => ['required', 'email:rfc,dns'],
+            'email'              => ['required', 'email:rfc'],
             'subject'            => ['required', 'string', 'max:255'],
             'body'               => ['required', 'string', 'min:10', 'max:2000'],
             '_hp'                => ['sometimes', 'string'],
@@ -47,13 +47,15 @@ class ContactFormRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         // Strip newlines to prevent email header injection
+        // Also ensure _hp and cf_turnstile_token are always strings (not null)
         $this->merge([
-            'name'    => preg_replace('/[\r\n]/', '', $this->name ?? ''),
-            'subject' => preg_replace('/[\r\n]/', '', $this->subject ?? ''),
+            'name'               => preg_replace('/[\r\n]/', '', $this->name ?? ''),
+            'subject'            => preg_replace('/[\r\n]/', '', $this->subject ?? ''),
+            '_hp'                => (string) ($this->input('_hp') ?? ''),
+            'cf_turnstile_token' => (string) ($this->input('cf_turnstile_token') ?? ''),
         ]);
 
         if ($this->has('body')) {
-            // Sanitize HTML — strip all tags to prevent XSS
             $this->merge([
                 'body' => strip_tags($this->body),
             ]);

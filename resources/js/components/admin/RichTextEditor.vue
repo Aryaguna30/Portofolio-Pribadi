@@ -27,6 +27,7 @@ let ignoreNextChange = false;
 onMounted(async () => {
   try {
     const { default: Quill } = await import('quill');
+    await import('quill/dist/quill.snow.css');
 
     quill = new Quill(editorRef.value, {
       theme: 'snow',
