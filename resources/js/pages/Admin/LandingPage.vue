@@ -84,6 +84,78 @@
         </form>
       </section>
 
+      <!-- ── About Section ─────────────────────────────────────── -->
+      <section class="admin-section">
+        <h2 class="admin-section__title">Tentang Saya</h2>
+        <form @submit.prevent="submitAbout">
+          <div class="form-grid">
+            <div class="form-field form-field--full">
+              <label for="about-bio1" class="form-label">Bio Paragraf 1</label>
+              <textarea
+                id="about-bio1"
+                v-model="aboutForm.bio1"
+                class="form-input form-textarea"
+                :class="{ 'form-input--error': aboutForm.errors.bio1 }"
+                placeholder="Paragraf pertama tentang diri Anda..."
+                rows="3"
+              ></textarea>
+              <p v-if="aboutForm.errors.bio1" class="form-error">{{ aboutForm.errors.bio1 }}</p>
+            </div>
+            <div class="form-field form-field--full">
+              <label for="about-bio2" class="form-label">Bio Paragraf 2</label>
+              <textarea
+                id="about-bio2"
+                v-model="aboutForm.bio2"
+                class="form-input form-textarea"
+                :class="{ 'form-input--error': aboutForm.errors.bio2 }"
+                placeholder="Paragraf kedua tentang diri Anda..."
+                rows="3"
+              ></textarea>
+              <p v-if="aboutForm.errors.bio2" class="form-error">{{ aboutForm.errors.bio2 }}</p>
+            </div>
+            <div class="form-field">
+              <label for="about-stat-years" class="form-label">Statistik — Tahun Pengalaman</label>
+              <input
+                id="about-stat-years"
+                v-model="aboutForm.stat_years"
+                type="text"
+                class="form-input"
+                :class="{ 'form-input--error': aboutForm.errors.stat_years }"
+                placeholder="Contoh: 3+"
+              />
+              <p v-if="aboutForm.errors.stat_years" class="form-error">{{ aboutForm.errors.stat_years }}</p>
+            </div>
+            <div class="form-field">
+              <label for="about-stat-projects" class="form-label">Statistik — Proyek Selesai</label>
+              <input
+                id="about-stat-projects"
+                v-model="aboutForm.stat_projects"
+                type="text"
+                class="form-input"
+                :class="{ 'form-input--error': aboutForm.errors.stat_projects }"
+                placeholder="Contoh: 12"
+              />
+              <p v-if="aboutForm.errors.stat_projects" class="form-error">{{ aboutForm.errors.stat_projects }}</p>
+            </div>
+            <div class="form-field">
+              <label for="about-stat-commits" class="form-label">Statistik — Total Commits</label>
+              <input
+                id="about-stat-commits"
+                v-model="aboutForm.stat_commits"
+                type="text"
+                class="form-input"
+                :class="{ 'form-input--error': aboutForm.errors.stat_commits }"
+                placeholder="Contoh: 1.2K+"
+              />
+              <p v-if="aboutForm.errors.stat_commits" class="form-error">{{ aboutForm.errors.stat_commits }}</p>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--primary" :disabled="aboutForm.processing">
+            {{ aboutForm.processing ? 'Menyimpan...' : 'Simpan Tentang Saya' }}
+          </button>
+        </form>
+      </section>
+
       <!-- ── CV Upload ─────────────────────────────────────────── -->
       <section class="admin-section">
         <h2 class="admin-section__title">File CV</h2>
@@ -413,6 +485,7 @@ import { useFocusTrap } from '@/composables/useFocusTrap.js';
 
 const props = defineProps({
   hero: { type: Object, default: () => ({}) },
+  about: { type: Object, default: () => ({}) },
   socialLinks: { type: Object, default: () => ({}) },
   timelineEntries: { type: Array, default: () => [] },
   skills: { type: Array, default: () => [] },
@@ -444,6 +517,19 @@ function removeProfession(idx) {
 
 function submitHero() {
   heroForm.put(route('admin.landing.hero.update'), { preserveScroll: true });
+}
+
+// ── About Form ─────────────────────────────────────────────────
+const aboutForm = useForm({
+  bio1:          props.about?.bio1 ?? '',
+  bio2:          props.about?.bio2 ?? '',
+  stat_years:    props.about?.stat_years ?? '3+',
+  stat_projects: props.about?.stat_projects ?? '12',
+  stat_commits:  props.about?.stat_commits ?? '1.2K+',
+});
+
+function submitAbout() {
+  aboutForm.put(route('admin.landing.about.update'), { preserveScroll: true });
 }
 
 // ── Social Links Form ──────────────────────────────────────────

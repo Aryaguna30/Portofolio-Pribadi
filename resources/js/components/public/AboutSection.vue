@@ -39,24 +39,24 @@
         >
           <!-- Bio paragraphs -->
           <p class="text-gray-400 leading-relaxed">
-            {{ t('about.bio1').split('Full-Stack Web Developer')[0] }}<strong class="text-white">Full-Stack Web Developer</strong>{{ t('about.bio1').split('Full-Stack Web Developer')[1] }}
+            {{ props.about?.bio1 || t('about.bio1') }}
           </p>
           <p class="text-gray-400 leading-relaxed">
-            {{ t('about.bio2') }}
+            {{ props.about?.bio2 || t('about.bio2') }}
           </p>
 
           <!-- Stats Row -->
           <div class="about__stats">
             <div class="about__stat">
-              <span class="about__stat-num gradient-text">3+</span>
+              <span class="about__stat-num gradient-text">{{ props.about?.statYears || '3+' }}</span>
               <span>{{ t('about.stats.years') }}</span>
             </div>
             <div class="about__stat">
-              <span class="about__stat-num gradient-text">12</span>
+              <span class="about__stat-num gradient-text">{{ props.about?.statProjects || '12' }}</span>
               <span>{{ t('about.stats.projects') }}</span>
             </div>
             <div class="about__stat">
-              <span class="about__stat-num gradient-text">1.2K+</span>
+              <span class="about__stat-num gradient-text">{{ props.about?.statCommits || '1.2K+' }}</span>
               <span>{{ t('about.stats.commits') }}</span>
             </div>
           </div>
@@ -273,6 +273,10 @@ const props = defineProps({
   skills: {
     type: Array,
     default: () => [],
+  },
+  about: {
+    type: Object,
+    default: () => ({}),
   },
 });
 

@@ -30,6 +30,13 @@ class LandingPageController extends Controller
                 'professions' => SiteSetting::get('hero_professions', []),
                 'description' => SiteSetting::get('hero_description', ''),
             ],
+            'about' => [
+                'bio1'          => SiteSetting::get('about_bio1', ''),
+                'bio2'          => SiteSetting::get('about_bio2', ''),
+                'stat_years'    => SiteSetting::get('about_stat_years', '3+'),
+                'stat_projects' => SiteSetting::get('about_stat_projects', '12'),
+                'stat_commits'  => SiteSetting::get('about_stat_commits', '1.2K+'),
+            ],
             'socialLinks' => [
                 'linkedin' => SiteSetting::get('social_linkedin', ''),
                 'github'   => SiteSetting::get('social_github', ''),
@@ -105,6 +112,28 @@ class LandingPageController extends Controller
         }
 
         return back()->with('success', 'CV deleted.');
+    }
+
+    /**
+     * Update about section settings.
+     */
+    public function updateAbout(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'bio1'          => ['nullable', 'string', 'max:1000'],
+            'bio2'          => ['nullable', 'string', 'max:1000'],
+            'stat_years'    => ['nullable', 'string', 'max:20'],
+            'stat_projects' => ['nullable', 'string', 'max:20'],
+            'stat_commits'  => ['nullable', 'string', 'max:20'],
+        ]);
+
+        SiteSetting::set('about_bio1', $validated['bio1'] ?? '');
+        SiteSetting::set('about_bio2', $validated['bio2'] ?? '');
+        SiteSetting::set('about_stat_years', $validated['stat_years'] ?? '3+');
+        SiteSetting::set('about_stat_projects', $validated['stat_projects'] ?? '12');
+        SiteSetting::set('about_stat_commits', $validated['stat_commits'] ?? '1.2K+');
+
+        return back()->with('success', 'About section updated.');
     }
 
     /**

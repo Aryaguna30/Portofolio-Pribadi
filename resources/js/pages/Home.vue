@@ -16,6 +16,7 @@
   <AboutSection
     :timeline-entries="timelineEntries"
     :skills="skills"
+    :about="about"
   />
 
   <PortfolioSection
@@ -50,6 +51,10 @@ const props = defineProps({
   projects: {
     type: Array,
     default: () => [],
+  },
+  about: {
+    type: Object,
+    default: () => ({}),
   },
   timelineEntries: {
     type: Array,

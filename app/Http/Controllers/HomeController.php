@@ -35,6 +35,13 @@ class HomeController extends Controller
         $socialGithub    = SiteSetting::get('social_github', '');
         $socialEmail     = SiteSetting::get('social_email', '');
 
+        // About section
+        $aboutBio1         = SiteSetting::get('about_bio1', '');
+        $aboutBio2         = SiteSetting::get('about_bio2', '');
+        $aboutStatYears    = SiteSetting::get('about_stat_years', '3+');
+        $aboutStatProjects = SiteSetting::get('about_stat_projects', '12');
+        $aboutStatCommits  = SiteSetting::get('about_stat_commits', '1.2K+');
+
         // Ensure professions is always an array
         if (! is_array($heroProfessions)) {
             $heroProfessions = $heroProfessions ? [$heroProfessions] : [];
@@ -52,6 +59,13 @@ class HomeController extends Controller
                 'professions'  => $heroProfessions,
                 'description'  => $heroDescription,
                 'typingSpeed'  => (int) $typingSpeed,
+            ],
+            'about' => [
+                'bio1'         => $aboutBio1,
+                'bio2'         => $aboutBio2,
+                'statYears'    => $aboutStatYears,
+                'statProjects' => $aboutStatProjects,
+                'statCommits'  => $aboutStatCommits,
             ],
             'projects'        => $projects,
             'timelineEntries' => $timelineEntries,
