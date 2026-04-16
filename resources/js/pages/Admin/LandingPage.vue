@@ -156,7 +156,8 @@
         </form>
       </section>
 
-      <!-- ── CV Upload ─────────────────────────────────────────── -->
+      <!-- ── CV Upload (hidden) ────────────────────────────────── -->
+      <!--
       <section class="admin-section">
         <h2 class="admin-section__title">File CV</h2>
         <div class="cv-status">
@@ -194,6 +195,7 @@
           </button>
         </form>
       </section>
+      -->
 
       <!-- ── Social Links ─────────────────────────────────────── -->
       <section class="admin-section">

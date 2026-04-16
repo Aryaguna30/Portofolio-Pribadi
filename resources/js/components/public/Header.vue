@@ -34,7 +34,9 @@
         <LanguageToggle />
         <ThemeToggle />
 
+        <!-- CV Button: hidden -->
         <!-- CV Button: link when available, disabled button with tooltip when not -->
+        <!--
         <template v-if="cvUrl">
           <a
             :href="cvUrl"
@@ -66,7 +68,6 @@
               </svg>
               {{ t('nav.downloadCv') }}
             </button>
-            <!-- Tooltip -->
             <div
               class="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-gray-900 border border-white/10 whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 z-10"
               role="tooltip"
@@ -76,6 +77,7 @@
             </div>
           </div>
         </template>
+        -->
 
         <!-- Hamburger (mobile) -->
         <button
@@ -116,7 +118,8 @@
         {{ item.label }}
       </a>
 
-      <!-- CV button in mobile menu -->
+      <!-- CV button in mobile menu: hidden -->
+      <!--
       <template v-if="cvUrl">
         <a
           :href="cvUrl"
@@ -149,6 +152,7 @@
           {{ t('nav.downloadCv') }}
         </button>
       </template>
+      -->
     </nav>
   </header>
 </template>
